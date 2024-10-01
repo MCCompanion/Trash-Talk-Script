@@ -1,0 +1,104 @@
+-- LocalScript
+
+-- List of messages
+local messages = {
+    "You know this game has a good tutorial",
+    "female dog",
+    "EEZZ",
+    "Cry",
+    "honestly trash",
+    "dog water",
+    "imagine being that bad",
+    "honestly mid",
+    "trashhhh",
+    "i'm not even trying and im winning",
+    "bro you are just horrible",
+    "can you get any worse at the game",
+    "you're so easy to kill",
+    "i've never seen anyone so bad at this game",
+    "i feel bad for you, you are so bad at the game its making me cringe",
+    "you're the worst player i've ever played against",
+    "LOOOOL",
+    "EEEEZ",
+    "bro you're so mad",
+    "it's honestly funny how bad you are",
+    "you got trashed so hard",
+    "keep crying",
+    "i'm not even trying lol",
+    "just quit you're embarrassing yourself",
+    "i feel like im playing against a bot",
+    "just accept the fact that you're terrible",
+    "i'm laughing so hard at how bad you are",
+    "you literally have no skill",
+    "you're so easy to beat",
+    "how do you even play this game",
+    "stop crying about losing",
+    "get gud",
+    "how are you not embarrassed",
+    "i've never seen anyone play so horribly",
+    "my little brother could play better than you",
+    "honestly don't even try to get better at the game",
+    "it's like you're trying to lose",
+    "you're such a joke",
+    "just give up",
+    "this is so easy",
+    "this is a complete joke",
+    "i'm bored playing against you",
+    "you're so terrible",
+    "keep whining, it's funny",
+    "you're so terrible i feel like i'm just bullying you now",
+    "this is actually sad",
+    "you're just wasting your time",
+    "you're so slow",
+    "you're the dumbest player i've ever seen",
+    "you're so trash it's actually sad",
+    "you're a joke"
+}
+
+-- Index to keep track of the current message
+local currentIndex = 1
+
+-- Function to send a message to the chat
+local function sendMessage(message)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+end
+
+-- User Input Service to detect key presses
+local UserInputService = game:GetService("UserInputService")
+
+-- Event listener for key press
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then -- Ensure the player is not typing in a text box
+        if input.KeyCode == Enum.KeyCode.G then
+            -- Send the current message
+            sendMessage(messages[currentIndex])
+            
+            -- Move to the next message in the list
+            currentIndex = currentIndex + 1
+            
+            -- If we have reached the end of the list, start over from the first message
+            if currentIndex > #messages then
+                currentIndex = 1
+            end
+        end
+    end
+end)
+
+-- Create a ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CreditsGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a TextLabel
+local textLabel = Instance.new("TextLabel")
+textLabel.Parent = screenGui
+textLabel.Text = "Made by Vlaati"
+textLabel.Size = UDim2.new(0, 200, 0, 50) -- Width: 200px, Height: 50px
+textLabel.Position = UDim2.new(1, -210, 1, -60) -- 10px from the right, 10px from the bottom
+textLabel.BackgroundTransparency = 1 -- Make the background transparent
+textLabel.TextColor3 = Color3.new(1, 1, 1) -- White text
+textLabel.TextStrokeTransparency = 0.5 -- Slightly visible text stroke
+textLabel.TextSize = 20 -- Font size
+textLabel.Font = Enum.Font.SourceSans -- Font type
+textLabel.TextXAlignment = Enum.TextXAlignment.Right -- Align text to the right
+textLabel.TextYAlignment = Enum.TextYAlignment.Bottom -- Align text to the bottom
